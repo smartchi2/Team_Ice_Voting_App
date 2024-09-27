@@ -1,10 +1,7 @@
 package org.voting_app.voting_app.data.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,23 +16,25 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_Id;
+    @GeneratedValue
+    private Long id;
+
     private String firstName;
     private String lastName;
     private String email;
     private String phoneNumber;
     private String password;
-    private String confirmPassWord;
-    private LocalDate birthday;
     private String address;
     private String nationality;
     private String religion;
-    private String placeOfBirth;
+    private String dateOfBirth;
     private String stateOfOrigin;
     private String profession;
-
-
+    private String gender;
+    private int age;
+    private String role;
+    private String registrationNumber;
 }
