@@ -18,6 +18,6 @@ public class Candidates {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long position_id;
-    private String position_name;
+    private Positions position_name;
     private String candidateName;
 }
