@@ -14,10 +14,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Postions {
+public class Candidates {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long postion_id;
-    private String postion_name;
+    private Long position_id;
+    private Positions position_name;
     private String candidateName;
 }

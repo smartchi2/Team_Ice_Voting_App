@@ -1,16 +1,19 @@
 package org.voting_app.voting_app.dtos.response;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.voting_app.voting_app.util.RegistrationNumber;
 
-@Setter
 @Getter
+@Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegisterRequest {
+public class LoginUserResponse {
+    @Id
+    private long id;
     private String message;
-    private RegistrationNumber userRegistrationNumber;
 }
