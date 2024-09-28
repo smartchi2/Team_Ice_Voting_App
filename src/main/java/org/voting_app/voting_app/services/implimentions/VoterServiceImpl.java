@@ -60,7 +60,6 @@ public class VoterServiceImpl implements VoterService {
         voteForCandidateRequest.setCandidateName(request.getCandidateName());
         voteForCandidateRequest.setCandidatePosition(request.getCandidatePosition());
         voteForCandidateRequest.setRegistrationNumber(request.getRegistrationNumber());
-        voteForCandidateRequest.setRegistrationNumber(request.getRegistrationNumber());
         voteForCandidateRequest.setAge(request.getAge());
         voteForCandidateRequest.setAddPvc(request.getAddPvc());
         voteForCandidateRequest.setRegistrationNumber(request.getRegistrationNumber());

@@ -16,14 +16,13 @@ import lombok.Setter;
 @Entity
 public class Voter {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long voter_id;
     private Long candidateId;
     private String adminEmail;
     private String voter_name;
     private String voterEmail;
     private String candidateName;
-    private String registrationNumber;
     private String age;
     private String passWord;
     private String confirmPassWord;
