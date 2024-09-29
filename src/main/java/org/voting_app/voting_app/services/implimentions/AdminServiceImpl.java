@@ -48,7 +48,7 @@ public class AdminServiceImpl implements AdminServiceInterface {
     @Override
     public AddCandidateResponse addCandidate(AddCandidateRequest addCandidateRequest) {
         Candidates candidates = new Candidates();
-        AddCandidateRequest addCandidateRequest1 =
+        AddCandidateRequest addCandidateRequest1 = new AddCandidateRequest();
          Admin check = adminRepository.findByUserId(addCandidateRequest.getCandidateId());
 
 //
