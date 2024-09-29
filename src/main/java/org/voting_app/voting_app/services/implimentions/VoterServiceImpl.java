@@ -1,8 +1,10 @@
 package org.voting_app.voting_app.services.implimentions;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.voting_app.voting_app.data.model.Voter;
-import org.voting_app.voting_app.data.model.repositories.VoterRepository;
+import org.voting_app.voting_app.data.model.repositories.UserRepository;
+import org.voting_app.voting_app.data.repositories.VoterRepository;
 import org.voting_app.voting_app.dtos.request.DeleteVotedCandidateRequest;
 import org.voting_app.voting_app.dtos.request.PredictWinnerRequest;
 import org.voting_app.voting_app.dtos.request.VoteForCandidateRequest;
@@ -14,9 +16,13 @@ import org.voting_app.voting_app.dtos.response.VoterLoginResponse;
 import org.voting_app.voting_app.exceptions.VoterException;
 import org.voting_app.voting_app.services.interfaces.VoterService;
 
+
+
 @Service
 //@RequiredArgsConstructor
 public class VoterServiceImpl implements VoterService {
+    @Autowired
+    UserRepository userRepository;
 
     private final VoterRepository voterRepository;
 
@@ -26,12 +32,13 @@ public class VoterServiceImpl implements VoterService {
 
     @Override
     public VoterLoginResponse loginAsVoter(VoterLoginRequest voterRequest) {
-//        boolean findTheVoter = voterRepository.existsByEmail(voterRequest.getVoterEmail());
+//        boolean findTheVoter = voterRepository.existsByByEmail(voterRequest.getVoterEmail());
 //        if(!findTheVoter){
 //            throw new VoterException("Voter not found");
 //        }
-//        User user = v
-      return null;
+////       Optional user = userRepository.findUserByEmail(voterRequest.getVoterEmail());
+////        String isCorrect = user.getEmail();
+     return null;
     }
 
     @Override
@@ -72,13 +79,16 @@ public class VoterServiceImpl implements VoterService {
 
     @Override
     public DeleteVotedCandidateResponse deleteCandidate(DeleteVotedCandidateRequest request) {
-        DeleteVotedCandidateRequest request1 = new DeleteVotedCandidateRequest();
         for(Voter voter : voterRepository.findAll()) {
-            if(voter.getCandidateId().equals(request1.getCandidateId())){
-                 voterRepository.delete(voter);
+            if (voter.getCandidateId().equals(request.getCandidateId())) {
+                voterRepository.delete(voter);
+
+                DeleteVotedCandidateResponse delete = new DeleteVotedCandidateResponse();
+                delete.setMessage("Candidate " + request.getCandidateName() + " has been deleted");
+                return delete;
             }
         }
-        throw new VoterException("Candidate wasn't found or might has been deleted");
+        throw new VoterException("Candidate not found");
     }
 
     @Override
