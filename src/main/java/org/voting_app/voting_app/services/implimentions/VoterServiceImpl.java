@@ -3,7 +3,7 @@ package org.voting_app.voting_app.services.implimentions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.voting_app.voting_app.data.model.Voter;
-import org.voting_app.voting_app.data.model.repositories.UserRepository;
+//import org.voting_app.voting_app.data.model.repositories.UserRepository;
 import org.voting_app.voting_app.data.repositories.VoterRepository;
 import org.voting_app.voting_app.dtos.request.DeleteVotedCandidateRequest;
 import org.voting_app.voting_app.dtos.request.PredictWinnerRequest;
@@ -21,8 +21,8 @@ import org.voting_app.voting_app.services.interfaces.VoterService;
 @Service
 //@RequiredArgsConstructor
 public class VoterServiceImpl implements VoterService {
-    @Autowired
-    UserRepository userRepository;
+//    @Autowired
+//    private UserRepository userRepository;
 
     private final VoterRepository voterRepository;
 
@@ -64,7 +64,6 @@ public class VoterServiceImpl implements VoterService {
         voteForCandidateRequest.setVoterName(request.getVoterName());
         voteForCandidateRequest.setCandidateName(request.getCandidateName());
         voteForCandidateRequest.setCandidatePosition(request.getCandidatePosition());
-        voteForCandidateRequest.setRegistrationNumber(request.getRegistrationNumber());
         voteForCandidateRequest.setRegistrationNumber(request.getRegistrationNumber());
         voteForCandidateRequest.setAge(request.getAge());
         voteForCandidateRequest.setAddPvc(request.getAddPvc());

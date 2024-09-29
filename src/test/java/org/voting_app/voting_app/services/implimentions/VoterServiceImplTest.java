@@ -32,7 +32,7 @@ class VoterServiceImplTest {
       vote.setAge("18");
       vote.setCandidateName("peter Obi");
       vote.setVoterEmail("smart@gmail.comcandidateRepository");
-      vote.setRegistrationNumber("20245001");
+//      vote.setRegistrationNumber("20245001");
       vote.setPassWord("123456");
       vote.setConfirmPassWord("123456");
       Voter saved = voterRepository.save(vote);
@@ -47,9 +47,9 @@ class VoterServiceImplTest {
 
     @Test
     void deleteCandidate() {
-        Candidates user = new Candidates();
-        user.setCandidateName("Smart");
-        user.setPosition_name(Positions.GOVERNOR);
+//        Candidates user = new Candidates();
+//        user.setCandidateName("Smart");
+//        user.setPosition_name(Positions.GOVERNOR);
 
         DeleteVotedCandidateRequest request = new DeleteVotedCandidateRequest();
         request.setCandidateId(request.getCandidateId());

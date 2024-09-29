@@ -1,23 +1,25 @@
 package org.voting_app.voting_app.data.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table
 public class Candidates {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long position_id;
-    private Positions position_name;
-    private String candidateName;
+    @GeneratedValue
+    private Long id;
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String position;
+    private String phoneNumber;
+    private String party;
+    private String pvc;
+    private Long adminId;
 }

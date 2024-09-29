@@ -5,14 +5,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.voting_app.voting_app.data.model.Positions;
 
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DeleteVotedCandidateRequest {
-    private String candidateName;
-    private Long candidateId;
-    private Positions candidatePosition;
+public class UpdateCandidateProfileRequest {
+    @Id
+    private long id;
+    private String party;
+    private String position;
+    private String pvc;
+    private String phoneNumber;
+    private Long adminId;
 }
