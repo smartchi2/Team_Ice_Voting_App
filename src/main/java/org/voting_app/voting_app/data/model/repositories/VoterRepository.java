@@ -1,4 +1,4 @@
-package org.voting_app.voting_app.data.repositories;
+package org.voting_app.voting_app.data.model.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,10 +1,8 @@
 package org.voting_app.voting_app.services.implimentions;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.voting_app.voting_app.data.model.User;
 import org.voting_app.voting_app.data.model.Voter;
-import org.voting_app.voting_app.data.repositories.VoterRepository;
+import org.voting_app.voting_app.data.model.repositories.VoterRepository;
 import org.voting_app.voting_app.dtos.request.DeleteVotedCandidateRequest;
 import org.voting_app.voting_app.dtos.request.PredictWinnerRequest;
 import org.voting_app.voting_app.dtos.request.VoteForCandidateRequest;
