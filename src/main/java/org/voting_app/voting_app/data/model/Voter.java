@@ -17,7 +17,8 @@ import lombok.Setter;
 public class Voter {
     @Id
     @GeneratedValue
-    private Long voter_id;
+//    private Long voter_id;
+    private Long id;
     private Long candidateId;
     private String adminEmail;
     private String voter_name;
