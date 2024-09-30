@@ -6,7 +6,8 @@ import org.voting_app.voting_app.data.model.Voter;
 
 @Repository
 public interface VoterRepository extends JpaRepository<Voter, Long> {
-   boolean findByCandidateName(String candidateName);
-    boolean existsByRegistrationNumber(String registrationNumber);
-//    boolean existsByByEmail(String voterEmail);
+    Voter findVoterById(long id);
+    Voter findVoterByRegistrationNumber(String registrationNumber);
+    Voter findVoterByVoterEmail(String voterEmail);
+
 }

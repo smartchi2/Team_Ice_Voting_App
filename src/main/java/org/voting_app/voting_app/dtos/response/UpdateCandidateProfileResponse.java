@@ -10,9 +10,8 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class VoteForCandidateResponse {
+public class UpdateCandidateProfileResponse {
     @Id
-    private Long voter_id;
-    private String registrationNumber;
+    private long id;
     private String message;
 }

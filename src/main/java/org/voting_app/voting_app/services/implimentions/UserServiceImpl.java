@@ -2,20 +2,15 @@ package org.voting_app.voting_app.services.implimentions;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.voting_app.voting_app.dtos.request.FindUserByIdRequest;
-import org.voting_app.voting_app.dtos.request.LogOutUserRequest;
-import org.voting_app.voting_app.dtos.request.LoginUserRequest;
-import org.voting_app.voting_app.dtos.request.RegisterUserRequest;
-import org.voting_app.voting_app.dtos.response.FindUserByIdResponse;
-import org.voting_app.voting_app.dtos.response.LogOutUserResponse;
-import org.voting_app.voting_app.dtos.response.LoginUserResponse;
-import org.voting_app.voting_app.dtos.response.RegisterUserResponse;
+import org.voting_app.voting_app.dtos.request.*;
+import org.voting_app.voting_app.dtos.response.*;
 import org.voting_app.voting_app.data.model.User;
-import org.voting_app.voting_app.data.model.repositories.UserRepository;
+import org.voting_app.voting_app.data.repositories.UserRepository;
 import org.voting_app.voting_app.services.interfaces.UserServiceInterface;
 import org.voting_app.voting_app.exceptions.*;
 import org.voting_app.voting_app.util.RegistrationNumber;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -133,5 +128,19 @@ public class UserServiceImpl implements UserServiceInterface {
         findUserByIdResponse.setId(user.getId());
         findUserByIdResponse.setMessage("User Found Successfully");
         return findUserByIdResponse;
+    }
+
+    @Override
+    public FindAllUserResponse findAllUserResponse(FindAllUserRequest findAllUserRequest) {
+        List<User> listOfUsers = userRepository.findAll();
+        FindAllUserResponse findAllUserResponse = new FindAllUserResponse();
+        if(!listOfUsers.isEmpty()){
+            User user = listOfUsers.get(listOfUsers.size() - 1);
+            findAllUserResponse.setMessage("Users Found Successfully");
+            return findAllUserResponse;
+        }
+        else {
+            throw new ListIsEmptyException("List Is Empty");
+        }
     }
 }

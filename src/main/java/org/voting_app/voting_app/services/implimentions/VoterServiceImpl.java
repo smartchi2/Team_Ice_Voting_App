@@ -2,8 +2,12 @@ package org.voting_app.voting_app.services.implimentions;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.voting_app.voting_app.data.model.Candidates;
+//import org.voting_app.voting_app.data.model.repositories.UserRepository;
+import org.voting_app.voting_app.data.model.User;
 import org.voting_app.voting_app.data.model.Voter;
-import org.voting_app.voting_app.data.model.repositories.UserRepository;
+import org.voting_app.voting_app.data.repositories.CandidatesRepository;
+import org.voting_app.voting_app.data.repositories.UserRepository;
 import org.voting_app.voting_app.data.repositories.VoterRepository;
 import org.voting_app.voting_app.dtos.request.DeleteVotedCandidateRequest;
 import org.voting_app.voting_app.dtos.request.PredictWinnerRequest;
@@ -17,87 +21,74 @@ import org.voting_app.voting_app.exceptions.VoterException;
 import org.voting_app.voting_app.services.interfaces.VoterService;
 
 
-
 @Service
-//@RequiredArgsConstructor
 public class VoterServiceImpl implements VoterService {
     @Autowired
-    UserRepository userRepository;
+    private CandidatesRepository candidatesRepository;
+    @Autowired
+    private VoterRepository voterRepository;
 
-    private final VoterRepository voterRepository;
-
+    @Autowired
+    private UserRepository userRepository;
     private VoterServiceImpl(VoterRepository voterRepository){
         this.voterRepository = voterRepository;
     }
 
     @Override
     public VoterLoginResponse loginAsVoter(VoterLoginRequest voterRequest) {
-//        boolean findTheVoter = voterRepository.existsByByEmail(voterRequest.getVoterEmail());
-//        if(!findTheVoter){
-//            throw new VoterException("Voter not found");
-//        }
-////       Optional user = userRepository.findUserByEmail(voterRequest.getVoterEmail());
-////        String isCorrect = user.getEmail();
-     return null;
+        User user = userRepository.findUserById(voterRequest.getId())
+                .orElseThrow(() -> new VoterException("User not found"));
+        if(user.getRole().equalsIgnoreCase("voter")){
+            Voter voter = new Voter();
+            voter.setVoterEmail(voterRequest.getVoterEmail());
+            voter.setPassWord(voterRequest.getPassWord());
+            voter.setRegistrationNumber(voterRequest.getRegistrationNumber());
+            voterRepository.save(voter);
+            userRepository.save(user);
+            VoterLoginResponse voterLoginResponse = new VoterLoginResponse();
+            voterLoginResponse.setId(voter.getId());
+            voterLoginResponse.setMessage("Voter successfully logged in");
+            return voterLoginResponse;
+        }
+        else {
+            throw new VoterException("User not found");
+        }
     }
 
     @Override
     public VoteForCandidateResponse voteForCandidate(VoteForCandidateRequest voteForCandidateRequest) {
-        VoteForCandidateRequest request = new VoteForCandidateRequest();
-       boolean checkCandidate = voterRepository.findByCandidateName(request.getCandidateName());
-        if(!checkCandidate)
-        if(request.getCandidateName().isBlank() || request.getAge().isBlank()
-                || request.getAddPvc().isBlank()){
+        Voter voter = voterRepository.findVoterById(voteForCandidateRequest.getId());
+        if(voteForCandidateRequest.getCandidateName().isBlank() || voteForCandidateRequest.getAge().isBlank()
+                || voteForCandidateRequest.getAddPvc().isBlank()){
             throw new VoterException("Fields cannot be empty");
         }
-        if(request.getAge().length() <= 17){
+        if(voteForCandidateRequest.getAge().length() > 18){
             throw new VoterException("Ages must be between 18 and above");
 
         }
-        if(request.getVoterName().isBlank()){
+        if(voteForCandidateRequest.getVoterName().isBlank()){
             throw new VoterException("Voter name cannot be blank");
         }
-        boolean checkVoterRegisteredNumber = voterRepository.existsByRegistrationNumber(request.getRegistrationNumber());
-        if(!checkVoterRegisteredNumber){
-            throw  new VoterException("Voter registration number does not exist");
-        }
-        voteForCandidateRequest.setVoterName(request.getVoterName());
-        voteForCandidateRequest.setCandidateName(request.getCandidateName());
-        voteForCandidateRequest.setCandidatePosition(request.getCandidatePosition());
-        voteForCandidateRequest.setRegistrationNumber(request.getRegistrationNumber());
-        voteForCandidateRequest.setRegistrationNumber(request.getRegistrationNumber());
-        voteForCandidateRequest.setAge(request.getAge());
-        voteForCandidateRequest.setAddPvc(request.getAddPvc());
-        voteForCandidateRequest.setRegistrationNumber(request.getRegistrationNumber());
+        voterRepository.findVoterByRegistrationNumber(voteForCandidateRequest.getRegistrationNumber());
+        voter.setVoterName(voteForCandidateRequest.getVoterName());
+        voter.setCandidateName(voteForCandidateRequest.getCandidateName());
+        voter.setCandidatePosition(voteForCandidateRequest.getCandidatePosition());
+        voter.setRegistrationNumber(voteForCandidateRequest.getRegistrationNumber());
+        voter.setAge(voteForCandidateRequest.getAge());
+        voter.setAddPvc(voteForCandidateRequest.getAddPvc());
+        voter.setRegistrationNumber(voteForCandidateRequest.getRegistrationNumber());
 
         VoteForCandidateResponse response = new VoteForCandidateResponse();
-        response.setCandidateId(response.getCandidateId());
-        response.setMessage("Candidate " + request.getCandidateName() + " has been voted");
-        response.setRegistrationNumber(request.getRegistrationNumber());
+        response.setVoter_id(voter.getId());
+        response.setMessage("Candidate has been voted For");
+        response.setRegistrationNumber(voter.getRegistrationNumber());
         return response;
-    }
-
-    @Override
-    public DeleteVotedCandidateResponse deleteCandidate(DeleteVotedCandidateRequest request) {
-        for(Voter voter : voterRepository.findAll()) {
-            if (voter.getCandidateId().equals(request.getCandidateId())) {
-                voterRepository.delete(voter);
-
-                DeleteVotedCandidateResponse delete = new DeleteVotedCandidateResponse();
-                delete.setMessage("Candidate " + request.getCandidateName() + " has been deleted");
-                return delete;
-            }
-        }
-        throw new VoterException("Candidate not found");
     }
 
     @Override
     public PredictWinnerResponse predictWinner(PredictWinnerRequest request) {
         PredictWinnerRequest request1 = new PredictWinnerRequest();
-        if(request1.getParticipantName().isBlank() || request1.getPartyName().isBlank()){
-            throw new VoterException("Fields cannot be blank");
-        }
-        request1.setCandidateId(request.getCandidateId());
+        Voter voter= voterRepository.findVoterByVoterEmail(request.getEmail());
         request1.setPartyName(request.getPartyName());
         request1.setParticipantName(request.getParticipantName());
         request1.setPositions(request.getPositions());
@@ -105,7 +96,6 @@ public class VoterServiceImpl implements VoterService {
 
         PredictWinnerResponse response = new PredictWinnerResponse();
         response.setMessage("Your Have picked candidate with details"
-                + request.getCandidateId()
                 + request.getPartyName() +
                 request.getParticipantName() +
                 request.getPositions() + "to"

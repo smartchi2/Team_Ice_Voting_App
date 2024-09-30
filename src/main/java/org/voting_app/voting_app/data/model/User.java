@@ -9,6 +9,8 @@ import lombok.Setter;
 import org.voting_app.voting_app.util.RegistrationNumber;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -37,4 +39,6 @@ public class User {
     private int age;
     private String role;
     private String registrationNumber;
+    @ManyToMany
+    List<User> userList = new ArrayList<User>();
 }

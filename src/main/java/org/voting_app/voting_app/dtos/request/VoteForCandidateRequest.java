@@ -1,5 +1,6 @@
 package org.voting_app.voting_app.dtos.request;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,8 @@ import org.voting_app.voting_app.data.model.Positions;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VoteForCandidateRequest {
+    @Id
+    private long id;
     private String voterName;
     private String registrationNumber;
     private String candidateName;
