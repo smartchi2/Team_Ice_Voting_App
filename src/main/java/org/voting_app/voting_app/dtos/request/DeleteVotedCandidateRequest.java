@@ -12,7 +12,8 @@ import org.voting_app.voting_app.data.model.Positions;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeleteVotedCandidateRequest {
-    private String candidateName;
+    private String firstName;
+    private String lastName;
+    @Id
     private Long candidateId;
-    private Positions candidatePosition;
 }
