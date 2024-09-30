@@ -49,7 +49,7 @@ public class AdminServiceImpl implements AdminServiceInterface {
     public AddCandidateResponse addCandidate(AddCandidateRequest addCandidateRequest) {
         Candidates candidates = new Candidates();
         AddCandidateRequest addCandidateRequest1 = new AddCandidateRequest();
-         Admin check = adminRepository.findByUserId(addCandidateRequest.getCandidateId());
+//         Admin check = adminRepository.findByUserId(addCandidateRequest.getCandidateId());
 
 //
 //        if (addCandidateRequest.getCandidateEmail().isBlank()) {
