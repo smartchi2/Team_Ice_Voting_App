@@ -1,5 +1,6 @@
 package org.voting_app.voting_app.dtos.request;
 
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,9 @@ import org.voting_app.voting_app.data.model.PredictionSet;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PredictWinnerRequest {
+    @Id
     private Long predictionSetId;
-    private Long candidateId;
+    private String  email;
     private String partyName;
     private String participantName;
     private Positions positions;

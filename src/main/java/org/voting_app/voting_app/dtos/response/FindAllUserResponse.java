@@ -1,18 +1,19 @@
 package org.voting_app.voting_app.dtos.response;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class VoteForCandidateResponse {
+public class FindAllUserResponse {
     @Id
-    private Long voter_id;
-    private String registrationNumber;
+    private long id;
     private String message;
 }

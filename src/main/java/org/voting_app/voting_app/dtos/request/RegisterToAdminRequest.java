@@ -10,12 +10,13 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateCandidateProfileRequest {
+public class RegisterToAdminRequest {
     @Id
     private long id;
-    private String party;
+    private String email;
+    private String password;
+    private String firstName;
+    private String lastName;
     private String position;
-    private String pvc;
     private String phoneNumber;
-    private Long adminId;
 }
