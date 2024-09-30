@@ -45,13 +45,34 @@ public class AdminServiceImplTest {
          LoginAdminResponse loginAdminResponse = adminServiceInterface.loginAdmin(adminRequest);
          assertThat(loginAdminResponse.getMessage()).isEqualTo("Login Successful");
     }
+
     @Test
     public void addCandidate() {
         Candidates candidate = new Candidates();
         candidate.setCandidateName("");
-    }
+            boolean isValid = candidate.validate();
+            assertFalse("Candidate should not be valid with an empty name", isValid);
+//            try {
+//                candidate.add();
+//                fail("Expected an exception to be thrown for an empty candidate name");
+//            } catch (IllegalArgumentException e) {
+//                assertEquals("Candidate name cannot be empty", e.getMessage());
+//            }
+        }
+
+
 
     @Test
     public void findCandidate() {
+    }
+
+    @Test
+    public void UpdateCandidateProfile(){
+
+    }
+
+    @Test
+    public void deleteCandidate(){
+
     }
 }
