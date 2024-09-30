@@ -11,10 +11,10 @@ import org.voting_app.voting_app.dtos.response.VoterLoginResponse;
 
 public interface VoterService {
     VoterLoginResponse loginAsVoter(VoterLoginRequest voterRequest);
+    VoterLogoutResponse logoutAsVoter(VoterLogoutRequest voterRequest);
     VoteForCandidateResponse voteForCandidate(VoteForCandidateRequest voteForCandidateRequest);
-    DeleteVotedCandidateResponse deleteCandidate(DeleteVotedCandidateRequest request);
-    PredictWinnerResponse predictWinner(PredictWinnerRequest request);
-
-
-
+    VoteForLocalGovernorResponse voteForLocalGovernorResponse(VoteForLocalGovernorRequest voteForLocalGovernorRequest);
+    ViewLiveResultResponse viewLiveResultResponse(ViewLiveResultRequest viewLiveResultRequest);
+    ContactResponse contactResponse(ContactRequest contactRequest);
+    ViewProfileResponse viewProfileResponse();
 }
